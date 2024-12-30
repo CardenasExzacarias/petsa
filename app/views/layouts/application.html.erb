@@ -9,7 +9,6 @@
 
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_pack_tag 'darkmode', defer: true %>
 </head>
 
 <body>
@@ -19,14 +18,24 @@
                 <%= link_to notes_path, class: 'brand-logo center' do %>
                 <%= I18n.t('navbar.title') %>
                 <% end %>
-                <div class="right" style="margin-top: -2px">
-                    <%= form_with(url: set_locale_path, method: :post, local: true, class: 'language-switcher') do %>
-                    <%= select_tag 'locale', options_for_select([['English', 'en'], ['Español', 'es']], I18n.locale), class: 'browser-default' %>
-                    <%= submit_tag 'Switch', class: 'btn' %>
-                    <% end %>
-                    <button id="dark-mode-toggle" class="btn-floating btn-large" style="margin: 0px 5px;">
-                        <i class="material-icons">brightness_2</i>
-                    </button>
+                <div class="right row" style="display:flex; align-items: center;">
+                    <div class="col s6">
+                        <%= form_with(url: set_locale_path, method: :post, local: true) do %>
+                        <%=
+                            select_tag 'locale',
+                            options_for_select([['English', 'en'], ['Español', 'es']],
+                            I18n.locale),
+                            class: 'browser-default',
+                            onchange: 'this.form.submit();'
+                        %>
+                        <% end %>
+                    </div>
+                    <div class="col s6">
+                        <button id="dark-mode-toggle" class="btn-floating btn-large" style="margin: 0px 5px;">
+                            <i class="material-icons">brightness_2</i>
+                        </button>
+                    </div>
+
                 </div>
             </div>
         </nav>
@@ -36,6 +45,7 @@
         <%= yield %>
     </div>
     <%= javascript_pack_tag 'timezone' %>
+    <%= javascript_pack_tag 'darkmode', defer: true %>
 </body>
 
 </html>
