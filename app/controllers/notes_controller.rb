@@ -2,32 +2,43 @@ class NotesController < ApplicationController
   before_action :set_note, only: %i[ show edit update destroy ]
 
   def index
-    filters = params[:filters]&.to_unsafe_h&.symbolize_keys
+    session[:filters] ||= {}
   
-    if filters && filters[:title].present?
-      @notes = Note.search_by_title_or_body(filters[:title])
+    @filters = params[:filters]&.to_unsafe_h&.symbolize_keys
+  
+    if @filters
+      session[:filters].merge!(@filters)
+    end
+  
+    @notes = if @filters.present? && @filters[:title].present?
+        Note.search_by_title_or_body(@filters[:title])
+    elsif session.dig('filters', 'title').present?
+      Note.search_by_title_or_body(session.dig('filters', 'title'))
     else
-      @notes = Note.order(created_at: :desc)
+      Note.all
     end
 
-    if filters && filters[:sort_by].present?
-      case filters[:sort_by]
-      when 'created_at_asc'
-        @notes = @notes.order(created_at: :asc)
-      when 'created_at_desc'
-        @notes = @notes.order(created_at: :desc)
-      when 'title_asc'
-        @notes = @notes.order(:title)
-      when 'title_desc'
-        @notes = @notes.order(title: :desc)
-      end
+    sort_by = if @filters.present? && @filters[:sort_by].present?
+        @filters[:sort_by]
     else
-      # Default sorting by created_at descending
+      session.dig('filters', 'sort_by')
+    end
+
+    case sort_by
+    when 'created_at_asc'
+      @notes = @notes.order(created_at: :asc)
+    when 'created_at_desc'
+      @notes = @notes.order(created_at: :desc)
+    when 'title_asc'
+      @notes = @notes.order(title: :asc)
+    when 'title_desc'
+      @notes = @notes.order(title: :desc)
+    else
       @notes = @notes.order(created_at: :desc)
     end
   
     @notes = @notes.group_by { |note| note.created_at.strftime("%B") }
-  end
+  end  
 
   def show
   end

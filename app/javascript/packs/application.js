@@ -24,4 +24,12 @@ document.addEventListener('turbolinks:load', function () {
 
   elems = document.querySelectorAll('select');
   M.FormSelect.init(elems);
+
+  document.querySelectorAll('form').forEach((form) => {
+    form.addEventListener('keydown', (event) => {
+      if (event.key === 'Enter') {
+        form.submit();
+      }
+    });
+  });
 })
