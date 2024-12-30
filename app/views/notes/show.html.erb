@@ -13,7 +13,7 @@
         <p style="white-space: pre-line"><%= @note.body %></p>
       </div>
       <div class="card-action">
-        <%= link_to @note, title: 'Delete', method: :delete, data: { confirm: 'Are you sure?' }, class: 'black-text' do %>
+        <%= link_to @note, title: 'Delete', method: :delete, data: { confirm: I18n.t('confirmations.are_you_sure') }, class: 'black-text' do %>
           <%= material_icon.delete %>
         <% end %>
 

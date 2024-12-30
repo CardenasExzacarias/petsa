@@ -52,22 +52,22 @@ class NotesController < ApplicationController
 
   def create
     @note = Note.new(note_params)
-
+  
     respond_to do |format|
       if @note.save
-        format.html { redirect_to note_url(@note), notice: "Note was successfully created." }
+        format.html { redirect_to note_url(@note), notice: I18n.t('notices.note_created') }
         format.json { render :show, status: :created, location: @note }
       else
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @note.errors, status: :unprocessable_entity }
       end
     end
-  end
+  end  
 
   def update
     respond_to do |format|
       if @note.update(note_params)
-        format.html { redirect_to note_url(@note), notice: "Note was successfully updated." }
+        format.html { redirect_to note_url(@note), notice: I18n.t('notices.note_updated') }
         format.json { render :show, status: :ok, location: @note }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -75,15 +75,15 @@ class NotesController < ApplicationController
       end
     end
   end
-
+  
   def destroy
     @note.destroy
     respond_to do |format|
-      format.html { redirect_to notes_url, notice: "Note was successfully destroyed." }
+      format.html { redirect_to notes_url, notice: I18n.t('notices.note_destroyed') }
       format.json { head :no_content }
     end
   end
-
+  
   private
 
   def set_note

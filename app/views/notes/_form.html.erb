@@ -1,11 +1,11 @@
 <%= form_with(model: note) do |form| %>
   <% if note.errors.any? %>
     <div id="error_explanation">
-      <h5><%= pluralize(note.errors.count, "error") %> prohibited this note from being saved:</h5>
+      <h5><%= pluralize(note.errors.count, I18n.t('errors.template.header.one'), I18n.t('errors.template.header.other')) %> <%= I18n.t('errors.template.body') %></h5>
 
       <ul>
-        <% note.errors.each do |error| %>
-          <li>&bull; <%= error.full_message %></li>
+        <% note.errors.full_messages.each do |message| %>
+          <li>&bull; <%= message %></li>
         <% end %>
       </ul>
     </div>
@@ -14,14 +14,14 @@
   <div class="row" style="margin-top: 7mm">
     <div class="input-field col s12">
       <%= form.text_field :title, autofocus: true %>
-      <%= form.label :title %>
+      <%= form.label :title, I18n.t('form.labels.title') %>
     </div>
   </div>
 
   <div class="row">
     <div class="input-field col s12">
       <%= form.text_area :body, class: 'materialize-textarea' %>
-      <%= form.label :body %>
+      <%= form.label :body, I18n.t('form.labels.body') %>
     </div>
   </div>
 

@@ -1,0 +1,60 @@
+es:
+  date:
+    month_names:
+      january: "Enero"
+      february: "Febrero"
+      march: "Marzo"
+      april: "Abril"
+      may: "Mayo"
+      june: "Junio"
+      july: "Julio"
+      august: "Agosto"
+      september: "Septiembre"
+      october: "Octubre"
+      november: "Noviembre"
+      december: "Diciembre"
+  placeholders:
+    search_by_title: "Buscar por título"
+  filters:
+    sort_by:
+      date_ascending: "Fecha Ascendente"
+      date_descending: "Fecha Descendente"
+      az: "A-Z"
+      za: "Z-A"
+  tooltips:
+    new_note: "Nueva nota"
+  activerecord:
+    models:
+      note: "Nota"
+    attributes:
+      note:
+        body: "Cuerpo"
+        title: "Título"
+    errors:
+      models:
+        note:
+          attributes:
+            body:
+              blank: "no puede estar en blanco"
+            title:
+              blank: "no puede estar en blanco"
+      messages:
+        taken: "ya está en uso"
+  form:
+    labels:
+      title: "Título"
+      body: "Cuerpo"
+  errors:
+    template:
+      header:
+        one: "error impidió que esta nota se guardara"
+        other: "errores impidieron que esta nota se guardara"
+      body: "Hubo problemas con los siguientes campos:"
+  notices:
+    note_created: "Nota creada con éxito."
+    note_updated: "Nota actualizada con éxito."
+    note_destroyed: "Nota eliminada con éxito."
+  navbar:
+    title: "Mi colección de notas"
+  confirmations:
+    are_you_sure: "¿Estás seguro?"

@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>My note collection</title>
+    <title><%= I18n.t('navbar.title') %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -17,10 +17,13 @@
         <nav>
             <div class="nav-wrapper">
                 <%= link_to notes_path, class: 'brand-logo center' do %>
-                My note collection
+                <%= I18n.t('navbar.title') %>
                 <% end %>
-                <!-- Dark mode toggle button-->
                 <div class="right" style="margin-top: -2px">
+                    <%= form_with(url: set_locale_path, method: :post, local: true, class: 'language-switcher') do %>
+                    <%= select_tag 'locale', options_for_select([['English', 'en'], ['Español', 'es']], I18n.locale), class: 'browser-default' %>
+                    <%= submit_tag 'Switch', class: 'btn' %>
+                    <% end %>
                     <button id="dark-mode-toggle" class="btn-floating btn-large" style="margin: 0px 5px;">
                         <i class="material-icons">brightness_2</i>
                     </button>

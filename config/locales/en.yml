@@ -1,33 +1,60 @@
-# Files in the config/locales directory are used for internationalization
-# and are automatically loaded by Rails. If you want to use locales other
-# than English, add the necessary files in this directory.
-#
-# To use the locales, use `I18n.t`:
-#
-#     I18n.t 'hello'
-#
-# In views, this is aliased to just `t`:
-#
-#     <%= t('hello') %>
-#
-# To use a different locale, set it with `I18n.locale`:
-#
-#     I18n.locale = :es
-#
-# This would use the information in config/locales/es.yml.
-#
-# The following keys must be escaped otherwise they will not be retrieved by
-# the default I18n backend:
-#
-# true, false, on, off, yes, no
-#
-# Instead, surround them with single quotes.
-#
-# en:
-#   'true': 'foo'
-#
-# To learn more, please read the Rails Internationalization guide
-# available at https://guides.rubyonrails.org/i18n.html.
-
 en:
-  hello: "Hello world"
+  date:
+    month_names:
+      january: "January"
+      february: "February"
+      march: "March"
+      april: "April"
+      may: "May"
+      june: "June"
+      july: "July"
+      august: "August"
+      september: "September"
+      october: "October"
+      november: "November"
+      december: "December"
+  placeholders:
+    search_by_title: "Search by title"
+  filters:
+    sort_by:
+      date_ascending: "Date Ascending"
+      date_descending: "Date Descending"
+      az: "A-Z"
+      za: "Z-A"
+  tooltips:
+    new_note: "New note"
+  activerecord:
+    models:
+      note: "Note"
+    attributes:
+      note:
+        body: "Body"
+        title: "Title"
+    errors:
+      models:
+        note:
+          attributes:
+            body:
+              blank: "can't be blank"
+            title:
+              blank: "can't be blank"
+      messages:
+        taken: "has already been taken"
+  form:
+    labels:
+      title: "Title"
+      body: "Body"
+  errors:
+    template:
+      header:
+        one: "error prohibited this note from being saved"
+        other: "errors prohibited this note from being saved"
+      body: "There were problems with the following fields:"
+  notices:
+    note_created: "Note was successfully created."
+    note_updated: "Note was successfully updated."
+    note_destroyed: "Note was successfully destroyed."
+  navbar:
+    title: "My note collection"
+  confirmations:
+    are_you_sure: "Are you sure?"

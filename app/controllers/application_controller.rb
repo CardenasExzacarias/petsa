@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
   before_action :set_user_timezone
+  before_action :set_locale
   
   def set_user_timezone
     if session[:timezone]
@@ -13,5 +14,9 @@ class ApplicationController < ActionController::Base
   def set_timezone
     session[:timezone] = params[:timezone]  # Store the time zone in the session
     render json: { status: 'success' }  # Respond with success message
+  end
+
+  def set_locale
+    I18n.locale = session[:locale] || I18n.default_locale
   end
 end

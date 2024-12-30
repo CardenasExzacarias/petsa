@@ -11,6 +11,15 @@ module NotesApp
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 6.1
 
+    # Set the default locale to Spanish
+    config.i18n.default_locale = :es
+
+    # Ensure translations are loaded and available for both English and Spanish
+    config.i18n.available_locales = [:en, :es]
+    
+    # Fallback to English if translation is missing
+    config.i18n.fallbacks = [:en]
+
     # Configuration for the application, engines, and railties goes here.
     #
     # These settings can be overridden in specific environments using the files
