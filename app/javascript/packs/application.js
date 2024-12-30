@@ -21,4 +21,7 @@ document.addEventListener('turbolinks:load', function () {
   if (elems.length) {
     elems.forEach(elem => M.textareaAutoResize(elem))
   }
+
+  elems = document.querySelectorAll('select');
+  M.FormSelect.init(elems);
 })

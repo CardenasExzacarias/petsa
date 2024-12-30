@@ -2,14 +2,31 @@ class NotesController < ApplicationController
   before_action :set_note, only: %i[ show edit update destroy ]
 
   def index
-    @notes = Note.order(created_at: :desc)
-
     filters = params[:filters]&.to_unsafe_h&.symbolize_keys
+  
     if filters && filters[:title].present?
-      @notes = @notes.search_by_title(filters[:title])
+      @notes = Note.search_by_title_or_body(filters[:title])
+    else
+      @notes = Note.order(created_at: :desc)
     end
 
-    @notes
+    if filters && filters[:sort_by].present?
+      case filters[:sort_by]
+      when 'created_at_asc'
+        @notes = @notes.order(created_at: :asc)
+      when 'created_at_desc'
+        @notes = @notes.order(created_at: :desc)
+      when 'title_asc'
+        @notes = @notes.order(:title)
+      when 'title_desc'
+        @notes = @notes.order(title: :desc)
+      end
+    else
+      # Default sorting by created_at descending
+      @notes = @notes.order(created_at: :desc)
+    end
+  
+    @notes = @notes.group_by { |note| note.created_at.strftime("%B") }
   end
 
   def show
