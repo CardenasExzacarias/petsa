@@ -25,7 +25,7 @@
                             select_tag 'locale',
                             options_for_select([['English', 'en'], ['Español', 'es']],
                             I18n.locale),
-                            class: 'browser-default',
+                            class: 'custom-dropdown',
                             onchange: 'this.form.submit();'
                         %>
                         <% end %>
@@ -35,12 +35,10 @@
                             <i class="material-icons">brightness_2</i>
                         </button>
                     </div>
-
                 </div>
             </div>
         </nav>
     </div>
-
     <div class="container">
         <%= yield %>
     </div>
